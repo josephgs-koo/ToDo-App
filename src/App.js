@@ -1,7 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCounter, minusCounter } from './action';
 
 function App() {
+  const state = useSelector((state) => state.countReducer);
+  const dispatch = useDispatch();
+
+  const minus = () => {
+    dispatch(minusCounter());
+  };
+
+  const plus = () => {
+    dispatch(addCounter());
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -17,6 +29,12 @@ function App() {
         >
           Learn React
         </a>
+
+        <div className="count">{state}</div>
+        <div className="buttonWrapper">
+          <button onClick={minus}> - </button>
+          <button onClick={plus}> + </button>
+        </div>
       </header>
     </div>
   );
